@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: {{ .Values.root.namespace }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.root.namespace }}
+  project: default
+  source:
+    path: {{ .Values.root.path }}
+    repoURL: {{ .Values.root.repoURL }}
+    targetRevision: {{ .Values.root.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

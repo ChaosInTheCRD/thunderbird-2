@@ -1,0 +1,29 @@
+{{- range .Values.applications }}
+{{ if .enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}
+finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .namespace }}
+  project: default
+  source:
+    repoURL: {{ .repoURL }}
+    targetRevision: {{ .targetRevision }}
+    {{ if .valuesFile }}
+    helm:
+      values: |-
+       {{- $.Files.Get .valuesFile | nindent 7 -}}
+    {{ end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace={{ .createNamespace }}
+{{ end }}
+{{- end }}

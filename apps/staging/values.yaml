@@ -1,0 +1,20 @@
+root:
+  namespace: argo-cd
+  path: apps/staging
+  repoURL: https://github.com/chaosinthecrd/thunderbird-2.git
+  targetRevision: HEAD
+applications:
+- name: thunderbird-2-argo-cd
+  enabled: true
+  namespace: argo-cd
+  createNamespace: true
+  targetRevision: HEAD
+  repoURL: https://github.com/chaosinthecrd/thunderbirds-argo-cd
+  valuesFile: application-values/values-argo-cd.yaml
+- name: thunderbird-2-prometheus
+  enabled: true
+  namespace: prometheus
+  createNamespace: true
+  targetRevision: HEAD
+  repoURL: https://github.com/chaosinthecrd/thunderbirds-prometheus.git
+  valuesFile: application-values/values-prometheus.yaml
