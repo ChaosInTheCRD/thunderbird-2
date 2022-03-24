@@ -11,6 +11,7 @@ applications:
   createNamespace: true
   targetRevision: argo-cd-4.2.1
   repoURL: https://github.com/chaosinthecrd/thunderbirds-argo-cd
+  path: charts/argo-cd
   valuesFile: application-values/values-argo-cd.yaml
 - name: thunderbird-2-prometheus
   enabled: true
@@ -18,4 +19,5 @@ applications:
   createNamespace: true
   targetRevision: prometheus-15.5.2
   repoURL: https://github.com/chaosinthecrd/thunderbirds-prometheus.git
+  path: charts/prometheus
   valuesFile: application-values/values-prometheus.yaml

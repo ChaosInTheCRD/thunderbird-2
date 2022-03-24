@@ -15,6 +15,7 @@ spec:
   project: default
   source:
     repoURL: {{ .repoURL }}
+    path: {{ .path }}
     targetRevision: {{ .targetRevision }}
     {{ if .valuesFile }}
     helm:
